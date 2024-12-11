@@ -1,18 +1,18 @@
-// TODO: create the game play logic
+// create the game play logic
 let firstCard = null;
 let secondCard = null;
 let lockBoard = false;
 let matches = 0;
 let startTime;
 
-// TODO: create a function to start the game
+// create a function to start the game
 function startGame() {
     startTime = new Date();
     generateField();
 }
 
 
-// TODO: generate a field of 4x4 cells with 8 pairs of random numbers from 1 to 8
+// generate a field of 4x4 cells with 8 pairs of random numbers from 1 to 8
 function generateField() {
     const field = document.getElementById('game-field');
     const numbers = [...Array(8).keys()].map(n => n + 1).flatMap(n => [n, n]);
@@ -28,13 +28,13 @@ function generateField() {
 }
 
 
-// TODO: add a click event listener to each cell
+// add a click event listener to each cell
 function onCardClick(event) {
     if (lockBoard) return;
     const cell = event.target;
     if (cell === firstCard) return;
 
-// TODO: on click, reveal the card face
+//  on click, reveal the card face
     cell.classList.add('reveal');
     cell.textContent = cell.dataset.number;
 
@@ -46,7 +46,7 @@ function onCardClick(event) {
     secondCard = cell;
     lockBoard = true;
 
-// TODO: if two cards are revealed, check if they match, if they match keep them revealed, if they don't match, hide the card face after a two second delay 
+// if two cards are revealed, check if they match, if they match keep them revealed, if they don't match, hide the card face after a two second delay 
     if (firstCard.dataset.number === secondCard.dataset.number) {
         matches++;
         resetCards();
@@ -58,7 +58,7 @@ function onCardClick(event) {
     }
 }
 
-// TODO: if they don't match, hide the card faces
+// if they don't match, hide the card faces
 function hideCards() {
     firstCard.classList.remove('reveal');
     secondCard.classList.remove('reveal');
@@ -71,7 +71,7 @@ function resetCards() {
     [firstCard, secondCard, lockBoard] = [null, null, false];
 }
 
-// TODO: if all cards are revealed, display a message with the time it took to complete the game
+// if all cards are revealed, display a message with the time it took to complete the game
 function endGame() {
     const endTime = new Date();
     const timeTaken = (endTime - startTime) / 1000;
@@ -106,5 +106,5 @@ function endGame() {
     }
 }
 
-// TODO: if the player chooses to continue playing, generate a new field of cards
+// if the player chooses to continue playing, generate a new field of cards
 document.getElementById('start-button').addEventListener('click', startGame);
