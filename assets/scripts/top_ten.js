@@ -1,4 +1,5 @@
 const fs = require('fs');
+const scores = require("./records.json")
 
 // poll ./assets for file named records.json and read the contents, create the file if it does not exist
 const path = './assets/records.json';
@@ -20,9 +21,9 @@ function writeToFile() {
 }
 
 // create a function to add a record to the records.json file, to include user name, fastest time taken to complete the game, average time per game, and number of games played
-function addRecord(userName, fastestTime, averageTime, gamesPlayed) {
+function addRecord(playerName, fastestTime, averageTime, gamesPlayed) {
     const newRecord = {
-        userName: userName,
+        playerName: playerName,
         fastestTime: fastestTime,
         averageTime: averageTime,
         gamesPlayed: gamesPlayed
@@ -61,7 +62,7 @@ function displayRecords() {
 
 function sortTable(header) {
     const headerIndex = {
-        'User Name': 'userName',
+        'User Name': 'playerName',
         'Fastest Time': 'fastestTime',
         'Average Time': 'averageTime',
         'Games Played': 'gamesPlayed'
