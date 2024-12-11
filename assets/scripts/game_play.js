@@ -1,3 +1,4 @@
+const scores = require("./records.json")
 // create the game play logic
 let firstCard = null;
 let secondCard = null;

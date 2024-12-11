@@ -1,97 +1,110 @@
+import { backgroundImages, cardBacks, cardFronts } from './playing_field.js';
+const scores = require("./records.json")
+// Options menu popup
+document.addEventListener('DOMContentLoaded', () => {
+    const popup = document.createElement('div');
+    popup.id = 'optionsPopup';
+    popup.style.display = 'none';
+    popup.innerHTML = `
+        <h2>Options Menu</h2>
+        <label for="playerName">Player Name:</label>
+        <input type="text" id="playerName" name="playerName">
+        <button id="submitName">Submit</button>
+        <button id="resetStats">Reset Stats</button>
+        <label for="backgroundImage">Background Image:</label>
+        <select id="backgroundImage"></select>
+        <label for="cardBack">Card Back:</label>
+        <select id="cardBack"></select>
+        <label for="cardFront">Card Front:</label>
+        <select id="cardFront"></select>
+        <button id="newGame">New Game</button>
+        <button id="quitGame">Quit</button>
+    `;
+    document.body.appendChild(popup);
 
-function side_menu() {
-    // Create links for the side menu
-    const menu = document.createElement('div');
-    menu.id = 'side-menu';
+    const playerNameInput = document.getElementById('playerName');
+    const submitNameButton = document.getElementById('submitName');
+    const resetStatsButton = document.getElementById('resetStats');
+    const backgroundImageSelect = document.getElementById('backgroundImage');
+    const cardBackSelect = document.getElementById('cardBack');
+    const cardFrontSelect = document.getElementById('cardFront');
+    const newGameButton = document.getElementById('newGame');
+    const quitGameButton = document.getElementById('quitGame');
 
-    const playerNameLink = document.createElement('a');
-    playerNameLink.href = '#';
-    playerNameLink.innerText = 'Player Name';
-    playerNameLink.onclick = player_name;
+    // Populate backgroundImageSelect, cardBackSelect, and cardFrontSelect with options from playing_field.js
+    // Assuming playing_field.js exports arrays: backgroundImages, cardBacks, cardFronts
 
-    const bestTimeLink = document.createElement('a');
-    bestTimeLink.href = '#';
-    bestTimeLink.innerText = 'Best Time';
-    bestTimeLink.onclick = best_time;
-
-    const gamesPlayedLink = document.createElement('a');
-    gamesPlayedLink.href = '#';
-    gamesPlayedLink.innerText = 'Games Played';
-    gamesPlayedLink.onclick = games_played;
-
-    const optionsMenuLink = document.createElement('a');
-    optionsMenuLink.href = '#';
-    optionsMenuLink.innerText = 'Options Menu';
-    optionsMenuLink.onclick = options_menu;
-
-    const restartButton = document.createElement('button');
-    restartButton.innerText = 'Restart';
-    restartButton.onclick = restart;
-
-    const quitButton = document.createElement('button');
-    quitButton.innerText = 'Quit';
-    quitButton.onclick = quit;
-
-    menu.appendChild(playerNameLink);
-    menu.appendChild(bestTimeLink);
-    menu.appendChild(gamesPlayedLink);
-    menu.appendChild(optionsMenuLink);
-    menu.appendChild(restartButton);
-    menu.appendChild(quitButton);
-
-    document.body.appendChild(menu);
-}
-
-function player_name() {
-    // Display player name
-    alert('Player Name: ' + localStorage.getItem('playerName'));
-}
-
-function best_time() {
-    // Display current best time
-    alert('Best Time: ' + localStorage.getItem('bestTime'));
-}
-
-function games_played() {
-    // Display current number of games played
-    alert('Games Played: ' + localStorage.getItem('gamesPlayed'));
-}
-
-function options_menu() {
-    // Allow user to change game options
-    alert('Options Menu');
-}
-
-function restart() {
-    // Reset current stats
-    localStorage.setItem('bestTime', '0');
-    localStorage.setItem('gamesPlayed', '0');
-    alert('Stats have been reset');
-}
-
-function quit() {
-    // Exit the game and store data to records.json
-    const playerName = localStorage.getItem('playerName');
-    const bestTime = localStorage.getItem('bestTime');
-    const gamesPlayed = localStorage.getItem('gamesPlayed');
-    const averageTime = localStorage.getItem('averageTime');
-
-    const data = {
-        playerName,
-        bestTime,
-        averageTime,
-        gamesPlayed
-    };
-
-    fetch('records.json', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    }).then(() => {
-        alert('Game data saved. Exiting game...');
-        window.close();
+    backgroundImages.forEach(image => {
+        const option = document.createElement('option');
+        option.value = image;
+        option.textContent = image;
+        backgroundImageSelect.appendChild(option);
     });
-}
 
+    cardBacks.forEach(card => {
+        const option = document.createElement('option');
+        option.value = card;
+        option.textContent = card;
+        cardBackSelect.appendChild(option);
+    });
+
+    cardFronts.forEach(card => {
+        const option = document.createElement('option');
+        option.value = card;
+        option.textContent = card;
+        cardFrontSelect.appendChild(option);
+    });
+
+    submitNameButton.addEventListener('click', () => {
+        const playerName = playerNameInput.value;
+        if (playerName) {
+            localStorage.setItem('playerName', playerName);
+        } else {
+            alert('Please enter a player name.');
+        }
+    });
+
+    resetStatsButton.addEventListener('click', () => {
+        // Reset stats logic here
+    localStorage.setItem('gamesPlayed', 0);
+    localStorage.setItem('bestTime', null);
+    localStorage.setItem('averageTime', null);
+    alert('Stats have been reset.');
+    });
+
+    newGameButton.addEventListener('click', () => {
+        import('./game_play.js').then(module => {
+            module.startNewGame();
+        }).catch(err => {
+            console.error('Failed to load game_play.js:', err);
+        });
+    });
+
+    quitGameButton.addEventListener('click', () => {
+        // Store current stats to records.json and quit game logic here
+        const stats = {
+            playerName: localStorage.getItem('playerName'),
+            gamesPlayed: localStorage.getItem('gamesPlayed'),
+            bestTime: localStorage.getItem('bestTime'),
+            averageTime: localStorage.getItem('averageTime')
+        };
+
+        fetch('/path/to/records.json', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(stats)
+        }).then(response => {
+            if (response.ok) {
+            alert('Stats saved successfully.');
+            window.close(); // Close the window
+            } else {
+            alert('Failed to save stats.');
+            }
+        }).catch(error => {
+            console.error('Error saving stats:', error);
+            alert('Error saving stats.');
+        });
+    });
+});
