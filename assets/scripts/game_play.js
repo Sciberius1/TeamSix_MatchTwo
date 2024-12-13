@@ -1,63 +1,111 @@
-// grid layout
-const beginGame = () => {
-    const gridContainer = document.createElement('div');
-    gridContainer.classList.add('grid-container');
+const scores = require("./records.json")
+// create the game play logic
+let firstCard = null;
+let secondCard = null;
+let lockBoard = false;
+let matches = 0;
+let startTime;
+
+// create a function to start the game
+function startGame() {
+    startTime = new Date();
+    generateField();
+}
+
+
+// generate a field of 4x4 cells with 8 pairs of random numbers from 1 to 8
+function generateField() {
+    const field = document.getElementById('game-field');
+    const numbers = [...Array(8).keys()].map(n => n + 1).flatMap(n => [n, n]);
+    numbers.sort(() => Math.random() - 0.5);
 
     for (let i = 0; i < 16; i++) {
-        const gridItem = document.createElement('div');
-        gridItem.classList.add('grid-item');
-        gridContainer.appendChild(gridItem);
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        cell.dataset.number = numbers[i];
+        cell.addEventListener('click', onCardClick);
+        field.appendChild(cell);
+    }
+}
+
+
+// add a click event listener to each cell
+function onCardClick(event) {
+    if (lockBoard) return;
+    const cell = event.target;
+    if (cell === firstCard) return;
+
+//  on click, reveal the card face
+    cell.classList.add('reveal');
+    cell.textContent = cell.dataset.number;
+
+    if (!firstCard) {
+        firstCard = cell;
+        return;
     }
 
-    document.body.appendChild(gridContainer);
-};
+    secondCard = cell;
+    lockBoard = true;
 
-beginGame();
-
-// card population
-const cardValues = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-const cards = [...cardValues, ...cardValues];
-cards.sort(() => 0.5 - Math.random());
-
-const gridItems = document.querySelectorAll('.grid-item');
-gridItems.forEach((gridItem, index) => {
-    gridItem.dataset.value = cards[index];
-    gridItem.innerText = cards[index]; // For debugging purposes, remove this line in production
-});
-
-// card match
-const checkGameOver = () => {
-    const matchedCards = document.querySelectorAll('.matched');
-    if (matchedCards.length === cards.length) {
-        setTimeout(() => {
-            alert('Congratulations! You have matched all the cards!');
-        }, 500);
-    }
-};
-
-const checkForMatch = () => {
-    if (firstCard.dataset.value === secondCard.dataset.value) {
-        firstCard.classList.add('matched');
-        secondCard.classList.add('matched');
+// if two cards are revealed, check if they match, if they match keep them revealed, if they don't match, hide the card face after a two second delay 
+    if (firstCard.dataset.number === secondCard.dataset.number) {
+        matches++;
         resetCards();
-        checkGameOver();
-    } else {
-        setTimeout(() => {
-            firstCard.classList.remove('flipped');
-            secondCard.classList.remove('flipped');
-            resetCards();
-        }, 1000);
-    }
-};
-gridItems.forEach((gridItem) => {
-    gridItem.addEventListener('click', (event) => {
-        if (!event.target.classList.contains('flipped') && !event.target.classList.contains('matched')) {
-            flipCard(event);
+        if (matches === 8) {
+            endGame();
         }
-    });
-});
+    } else {
+        setTimeout(hideCards, 2000);
+    }
+}
 
-// card mismatch
+// if they don't match, hide the card faces
+function hideCards() {
+    firstCard.classList.remove('reveal');
+    secondCard.classList.remove('reveal');
+    firstCard.textContent = '';
+    secondCard.textContent = '';
+    resetCards();
+}
 
-// game over
+function resetCards() {
+    [firstCard, secondCard, lockBoard] = [null, null, false];
+}
 
+// if all cards are revealed, display a message with the time it took to complete the game
+function endGame() {
+    const endTime = new Date();
+    const timeTaken = (endTime - startTime) / 1000;
+    alert(`Congratulations! You completed the game in ${timeTaken} seconds.`);
+    
+    // Add completion time to local storage and increment the number of games played
+    const records = JSON.parse(localStorage.getItem('records')) || { gamesPlayed: 0, fastestTime: null, totalTime: 0 };
+
+    records.gamesPlayed++;
+    records.totalTime += timeTaken;
+
+    if (!records.fastestTime || timeTaken < records.fastestTime) {
+        records.fastestTime = timeTaken;
+    }
+
+    localStorage.setItem('records', JSON.stringify(records));
+
+    const averageTime = (records.totalTime / records.gamesPlayed).toFixed(2);
+    alert(`Fastest Time: ${records.fastestTime} seconds\nAverage Time: ${averageTime} seconds`);
+
+    // Add prompt to continue playing or to view the leaderboard
+    const continuePlaying = confirm('Would you like to play again?');
+    if (continuePlaying) {
+        const field = document.getElementById('game-field');
+        field.innerHTML = '';
+        startGame();
+    } else {
+        const viewLeaderboard = confirm('Would you like to view the leaderboard?');
+        if (viewLeaderboard) {
+            displayLeaderboard();
+        }
+    }
+}
+
+// if the player chooses to continue playing, generate a new field of cards
+document.getElementById('start-button').addEventListener('click', startGame);

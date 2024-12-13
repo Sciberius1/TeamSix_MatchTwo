@@ -1,0 +1,14 @@
+[
+    {
+       "name": "Charles",
+       "gamesPlayed": 100,
+       "fastestTime": 30,
+       "averageTime": 315
+    },
+    {
+       "name": "Stephanie",
+       "gamesPlayed": 100,
+       "fastestTime": 30,
+       "averageTime": 310
+    }
+ ]
