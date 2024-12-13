@@ -1,98 +1,65 @@
-const fs = require('fs');
-const scores = require("./records.json")
-
-// poll ./assets for file named records.json and read the contents, create the file if it does not exist
-const path = './assets/records.json';
-
-function checkAndReadFile() {
-    if (!fs.existsSync(path)) {
-        fs.writeFileSync(path, JSON.stringify([]));
+//create a function to retrieve the records from the server and display the top ten records in the table according to the chosen requirements 
+async function fetchRecords() {
+    try {
+        const response = await fetch('/path/to/records.json');
+        const data = await response.json();
+        document.body.style.backgroundImage = `url(${data.backgroundImage})`;
+        displayRecords(data.records);
+    } catch (error) {
+        console.error('Error fetching records:', error);
     }
-    const data = fs.readFileSync(path, 'utf8');
-    return JSON.parse(data);
 }
 
-const records = checkAndReadFile();
-console.log(records);
-
-// create a function to write to the records.json file
-function writeToFile() {
-    fs.writeFileSync(path, JSON.stringify(records));
+// display ststs of the current session in a row above the top ten records table
+function displayCurrentSessionStats(stats) {
+    const table = document.getElementById('recordsTable');
+    const row = table.insertRow(0);
+    row.insertCell(0).innerText = stats.playerName;
+    row.insertCell(1).innerText = stats.gamesPlayed;
+    row.insertCell(2).innerText = stats.fastestTime;
+    row.insertCell(3).innerText = stats.averageTime;
+    const headerRow = table.insertRow(0);
+    headerRow.insertCell(0).innerText = 'Player Name';
+    headerRow.insertCell(1).innerText = 'Games Played';
+    headerRow.insertCell(2).innerText = 'Fastest Time';
+    headerRow.insertCell(3).innerText = 'Average Time';
 }
 
-// create a function to add a record to the records.json file, to include user name, fastest time taken to complete the game, average time per game, and number of games played
-function addRecord(playerName, fastestTime, averageTime, gamesPlayed) {
-    const newRecord = {
-        playerName: playerName,
-        fastestTime: fastestTime,
-        averageTime: averageTime,
-        gamesPlayed: gamesPlayed
-    };
-    records.push(newRecord);
-    writeToFile();
+
+// Example usage
+const currentSessionStats = {
+    playerName: 'Current Player',
+    gamesPlayed: 5,
+    fastestTime: 120,
+    averageTime: 150
+};
+
+displayCurrentSessionStats(currentSessionStats);
+
+function displayRecords(records) {
+    const table = document.getElementById('recordsTable');
+    const sortedRecords = records.sort((a, b) => a.fastestTime - b.fastestTime).slice(0, 10);
+    sortedRecords.forEach(record => {
+        const row = table.insertRow();
+        row.insertCell(0).innerText = record.playerName;
+        row.insertCell(1).innerText = record.gamesPlayed;
+        row.insertCell(2).innerText = record.fastestTime;
+        row.insertCell(3).innerText = record.averageTime;
+    });
 }
 
-// create a function to display the records in a table, and have the table sortable by user name, fastest time, average time, and games played
-function displayRecords() {
-    const table = document.createElement('table');
-    const headers = ['User Name', 'Fastest Time', 'Average Time', 'Games Played'];
-    const headerRow = document.createElement('tr');
-
+document.addEventListener('DOMContentLoaded', () => {
+    fetchRecords();
+    const headers = document.querySelectorAll('#recordsTable th');
     headers.forEach(header => {
-        const th = document.createElement('th');
-        th.textContent = header;
-        th.addEventListener('click', () => sortTable(header));
-        headerRow.appendChild(th);
-    });
-
-    table.appendChild(headerRow);
-
-    records.forEach(record => {
-        const row = document.createElement('tr');
-        Object.values(record).forEach(value => {
-            const td = document.createElement('td');
-            td.textContent = value;
-            row.appendChild(td);
+        header.addEventListener('click', () => {
+            const column = header.cellIndex;
+            const order = header.dataset.order = -(header.dataset.order || -1);
+            const rows = Array.from(document.querySelectorAll('#recordsTable tr:nth-child(n+2)'));
+            rows.sort((a, b) => order * (a.cells[column].innerText.localeCompare(b.cells[column].innerText, undefined, {numeric: true})));
+            rows.forEach(row => table.appendChild(row));
         });
-        table.appendChild(row);
     });
-
-    document.body.appendChild(table);
-}
-
-function sortTable(header) {
-    const headerIndex = {
-        'User Name': 'playerName',
-        'Fastest Time': 'fastestTime',
-        'Average Time': 'averageTime',
-        'Games Played': 'gamesPlayed'
-    }[header];
-
-    records.sort((a, b) => {
-        if (a[headerIndex] < b[headerIndex]) return -1;
-        if (a[headerIndex] > b[headerIndex]) return 1;
-        return 0;
-    });
-
-    document.querySelector('table').remove();
-    displayRecords();
-}
-
-displayRecords();
-// create a button to begin a new game and add an event listener to the button to start the game
-const newGameButton = document.getElementById('new-game-button');
-newGameButton.addEventListener('click', () => {
-    const gamePlayScript = document.createElement('script');
-    gamePlayScript.src = '/scripts/game_play.js';
-    document.body.appendChild(gamePlayScript);
-    console.log('New game started');
 });
+// if quitGame is called, add the currentSessionStats in the ./records.json file, append the chosen backgroundImage and cardBack images from options_menu.js to the records.json file with the current stats
 
-//  create a button to run the code for the options menu located in the options_menu.js file and add an event listener to the button to view the options menu
-const optionsMenuButton = document.getElementById('options-menu-button');
-optionsMenuButton.addEventListener('click', () => {
-    const optionsMenuScript = document.createElement('script');
-    optionsMenuScript.src = '/scripts/options_menu.js';
-    document.body.appendChild(optionsMenuScript);
-    console.log('Options menu opened');
-});
