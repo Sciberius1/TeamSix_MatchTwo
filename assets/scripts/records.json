@@ -1,0 +1,27 @@
+[
+    {
+       "playerName": "Charles",
+       "gamesPlayed": 100,
+       "fastestTime": 30,
+       "averageTime": 315,
+       "backgroundImage": "../assets/images/BLACKOUT.png",
+       "cardBack": "../assets/images/troll_picnic.png"
+    },
+    {
+      "playerName": "Stephanie",
+      "gamesPlayed": 100,
+      "fastestTime": 30,
+      "averageTime": 310,
+      "backgroundImage": "../assets/images/the_perfect_slushie.png",
+      "cardBack": "../assets/images/troll_picnic.png"
+    },
+    {
+      "playerName": "playerName",
+      "gamesPlayed": 0,
+      "fastestTime": 75,
+      "avgTime": null, 
+      "completedTimes": [],
+      "backgroundImage": "../images/space_trucking.jpg",
+      "cardBackImage": "../images/drone_education.png"
+    }
+ ]
