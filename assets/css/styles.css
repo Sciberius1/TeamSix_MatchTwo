@@ -1,12 +1,12 @@
 /* Elements for the side menu */
 
 :root {
-    --secondary: #9ff59c;
-    --body: #c6eb42;
-    --primary: #695cfe;
-    --primary-light: #cecafa;
-    --toggle: #f9cbcb;
-    --button: #f9cbcb;
+    --secondary: #485c47;
+    --body: #666d47;
+    --primary: #454170;
+    --primary-light: #555275;
+    --toggle: #9b5c5c;
+    --button: #813535;
     --text: #7a7878;
     --tran-01: all 0.2s ease-in-out;
     --tran-02: all 0.3s ease-in-out;
@@ -72,7 +72,7 @@ header .avatar .header-text {
 
 .sidemenu li {
    height: 50px;
-   background: red;
+   background: rgb(134, 71, 71);
    margin-top: 10px;
    list-style: none;
    display: flex;
