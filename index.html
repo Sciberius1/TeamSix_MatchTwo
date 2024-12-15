@@ -19,15 +19,17 @@
         <header>
             <div class="avatar">
                 <span class="image">
-                <img src="./assets/images/avatar.png" alt="avatar">
+                <img src="./assets/images/rainbow-flower-w-cottoncandy.png" alt="rainbow">
                 </span>
 
             <div class="text header-text">
                 <span class="game">Animal Match-Up</span>
                 <span class="group">Team 6</span>
             </div>
-            
-            <i class='bx bx-chevron-right toggle'></i>
+
+            <!-- === for colapsable menu === -->
+            <!-- <i class='bx bx-chevron-right toggle'></i> -->
+
         </header>
 
         <div class="menu-bar">
@@ -45,18 +47,23 @@
                     <p id="games">0</p>
                 </li>
 
+                <li class="play">
+                    <button id="play">PLAY!</button>
+                </li>
+
+                <!-- === if time allows === -->
+
                 <li class="options">
-                    <h2>Options</h2>
                     <button id="options">Options</button>
                 </li>
 
+                <!-- === end options === -->
+
                 <li class="restart">
-                    <h2>Restart</h2>
                     <button id="restart">Restart</button>
                 </li>
 
                 <li class="quit">
-                    <h2>Quit</h2>
                     <button id="quit">Quit</button>
                 </li>
             
@@ -65,7 +72,7 @@
     </nav>
 
     <script src="./assets/scrpts/playing_field.js"></script>
-    <script src="./assets/scrpts/side_menu.js"></script>
+    <script src="./assets/scrpts/sidemenu.js"></script>
     <script src="./assets/scrpts/score.js"></script>
     <script src="./assets/scrpts/games.js"></script>
     <script src="./assets/scrpts/options.js"></script>
