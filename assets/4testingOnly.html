@@ -1,5 +1,53 @@
-// import the settings from ./assets/scripts/records.json
-// display the background image stored in ./assets/scripts/records.json
-// if no image is found, display ./assets/images/BLACKOUT.png
-// create a fixed side bar that spans 350px on the left side of the screen running from top to bottom of the screen, set a temporary background color of #333333 for the sidebar
-// create a fixed header that spans the width of the screen and is 150px tall, set a temporary background color of #333333 for the header
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Ten Players</title>
+    <script src="top_ten.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const players = topTenPlayers; // Assuming topTenPlayers is an array of player objects in top_ten.js
+            const tableBody = document.getElementById('playersTableBody');
+
+            players.forEach(player => {
+                const row = document.createElement('tr');
+
+                const playerNameCell = document.createElement('td');
+                playerNameCell.textContent = player.playerName;
+                row.appendChild(playerNameCell);
+
+                const fastestTimeCell = document.createElement('td');
+                fastestTimeCell.textContent = player.fastestTime;
+                row.appendChild(fastestTimeCell);
+
+                const avgTimeCell = document.createElement('td');
+                avgTimeCell.textContent = player.avgTime;
+                row.appendChild(avgTimeCell);
+
+                const gamesPlayedCell = document.createElement('td');
+                gamesPlayedCell.textContent = player.gamesPlayed;
+                row.appendChild(gamesPlayedCell);
+
+                tableBody.appendChild(row);
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Top Ten Players</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Player Name</th>
+                <th>Fastest Time</th>
+                <th>Average Time</th>
+                <th>Games Played</th>
+            </tr>
+        </thead>
+        <tbody id="playersTableBody">
+           
+        </tbody>
+    </table>
+</body>
+</html>
