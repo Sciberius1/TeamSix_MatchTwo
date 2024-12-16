@@ -1,0 +1,10 @@
+[
+    {
+      "playerName": "Charles",
+      "gamesPlayed": 100,
+      "fastestTime": 30,
+      "averageTime": 315,
+      "backgroundImage": "../assets/images/BLACKOUT.png",
+      "cardBackImage": "../assets/images/troll_picnic.png"
+    }
+]
