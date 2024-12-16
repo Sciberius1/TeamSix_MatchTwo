@@ -3,51 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top Ten Players</title>
-    <script src="top_ten.js" defer></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const players = topTenPlayers; // Assuming topTenPlayers is an array of player objects in top_ten.js
-            const tableBody = document.getElementById('playersTableBody');
-
-            players.forEach(player => {
-                const row = document.createElement('tr');
-
-                const playerNameCell = document.createElement('td');
-                playerNameCell.textContent = player.playerName;
-                row.appendChild(playerNameCell);
-
-                const fastestTimeCell = document.createElement('td');
-                fastestTimeCell.textContent = player.fastestTime;
-                row.appendChild(fastestTimeCell);
-
-                const avgTimeCell = document.createElement('td');
-                avgTimeCell.textContent = player.avgTime;
-                row.appendChild(avgTimeCell);
-
-                const gamesPlayedCell = document.createElement('td');
-                gamesPlayedCell.textContent = player.gamesPlayed;
-                row.appendChild(gamesPlayedCell);
-
-                tableBody.appendChild(row);
-            });
-        });
-    </script>
+    <title>Game Layout</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('./scripts/game_play.js');
+            background-size: 100vw 100vh;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        header {
+            width: 100%;
+            max-height: 400px;
+            height: 10vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            line-height: 10vh;
+        }
+        #side_menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 25%;
+            max-width: 400px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            overflow-y: auto;
+        }
+        main {
+            margin-left: 25%;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Top Ten Players</h1>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Player Name</th>
-                <th>Fastest Time</th>
-                <th>Average Time</th>
-                <th>Games Played</th>
-            </tr>
-        </thead>
-        <tbody id="playersTableBody">
-           
-        </tbody>
-    </table>
+    <header>
+        <h1>Game Header</h1>
+        <iframe src="header.html" style="width: 100%; height: 100%; border: none;"></iframe>
+    </header>
+    <div id="side_menu">
+        <h1>Game Menu</h1>
+        <iframe src="side_menu.html" style="width: 100%; height: 100%; border: none;"></iframe>
+    </div>
+    <main>
+        <iframe src="game_content.html" style="width: 100vw; height: 100vh; display: flex; border: none;"></iframe>
+    </main>
 </body>
 </html>
