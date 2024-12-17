@@ -6,13 +6,7 @@
     <title>Card Matching Game</title>
     <style>
         body {
-            background-image: url('./images/backgrounds/landscape.png');
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+
         }
         .game-board {
             display: grid;
@@ -147,21 +141,6 @@
         }
     
     
-    const currentData = JSON.parse(localStorage.getItem('sessionData')) || [];
-
-    currentData.push(formData);
-
-    localStorage.setItem('sessionData', JSON.stringify(currentData));
-
-//export the playerName and timeTaken to ./scripts/records.json
-        // function exportRecords() {
-        //     const playerName = prompt('Enter your name to save your record:');
-        //     if (!playerName) return;
-        //     const timeTaken = Math.floor((endTime - startTime) / 1000);
-        //     const records = JSON.parse(localStorage.getItem('records')) || [];
-        //     records.push({ playerName, timeTaken });
-        //     localStorage.setItem('records', JSON.stringify(records));
-        // }
 
         createBoard();
     </script>
