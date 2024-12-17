@@ -1,5 +1,5 @@
 /* Elements for the side menu */
-
+/* 
 :root {
     --secondary: #10ca8f;
     --body: #2dc45f;
@@ -119,7 +119,7 @@ header .avatar .header-text {
     color: var(--text);
     display: flex;
     align-items: center;
-}
+} */
 
 /* === collapsable menu === */
 /* .sidemenu header .toggle {

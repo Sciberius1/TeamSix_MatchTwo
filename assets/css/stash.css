@@ -78,13 +78,6 @@ header .avatar .header-text {
     align-items: center;
 }
 
-.sidemenu li ::placeholder {
-
-    color: var(--primary);
-    font-size: 17px;
-
-}
-
 .sidemenu li {
    height: 50px;
    background: #056917c4;
