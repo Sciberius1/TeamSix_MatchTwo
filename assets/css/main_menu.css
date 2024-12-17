@@ -1,5 +1,37 @@
-body {
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
+}
+ul{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+body {
     background-color: black;
   }
-  
+  /*==main================*/
+  #main{
+    width: 100%;
+    min-height: 100vh;
+  }
+  /*--navigation==============*/
+  .navigation{
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    padding: 45px 10px;
+  }
+  .menu{
+    display: flex;
+    justify-content: left;
+    align-items: left;
+  }
+  .menu li a{
+    margin: 0px 20px;
+    color: #ffffff;
+    background: linear-gradient(97deg, rgba(59, 243, 63, 0.8) 0%,);
+  }
