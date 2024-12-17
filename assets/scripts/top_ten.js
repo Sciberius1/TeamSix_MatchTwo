@@ -61,5 +61,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-// if quitGame is called, add the currentSessionStats in the ./records.json file, append the chosen backgroundImage and cardBack images from options_menu.js to the records.json file with the current stats
+
+// Add table headers with click event listeners for sorting
+function addTableHeaders() {
+    const table = document.getElementById('recordsTable');
+    const headerRow = table.insertRow(0);
+    const headers = ['Player Name', 'Games Played', 'Fastest Time', 'Average Time'];
+    headers.forEach((headerText, index) => {
+        const headerCell = document.createElement('th');
+        headerCell.innerText = headerText;
+        headerCell.dataset.order = -1;
+        headerCell.addEventListener('click', () => {
+            const order = headerCell.dataset.order = -(headerCell.dataset.order || -1);
+            const rows = Array.from(document.querySelectorAll('#recordsTable tr:nth-child(n+2)'));
+            rows.sort((a, b) => {
+                const aText = a.cells[index].innerText;
+                const bText = b.cells[index].innerText;
+                return order * (aText.localeCompare(bText, undefined, { numeric: true }));
+            });
+            rows.forEach(row => table.appendChild(row));
+        });
+        headerRow.appendChild(headerCell);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchRecords();
+    addTableHeaders();
+});
 

@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<!-- Preload resources -->
-<link rel="preload" href="../assets/css/options_menu.css" as="style">
-<link rel="preload" href="../assets/js/options_menu.js" as="script">
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,41 +6,47 @@
     <link rel="stylesheet" href="../assets/css/options_menu.css">
     <title>Options Menu</title>
 </head>
+
+
+<!-- Create a modal for the options menu -->
 <body>
     <div id="optionsModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <div id="playerName" class="option-section">
-            <!--display "Player Name: ", playerName and editPlayerNameButton from options_menu.js-->
-            <h2>Player Name: </h2>
-            <p id="playerNameDisplay"></p>
-            <button id="editPlayerNameButton">Edit</button>
+        <!-- create a row within a div to display "Player Name: " and the player's name, and a button to change the player's name from currentSessionStats -->
+            <!-- checkPlayerName(); -->
+            <script src="./scripts/options_menu.js"></script>
             <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    displayPlayerName();
+                document.addEventListener("DOMContentLoaded", function() {
+                    checkPlayerName();
                 });
             </script>
-        </div>
-
-        <div id="backgroundImage" class="option-section">
-            <h2>Background Image</h2>
-                <div id="backgroundImageDisplay"></div>
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        displayBackgroundImage();
-                    });
-                </script>
+            <div class="row">
+            <div class="player-name">
+                <label for="playerName">Player Name: </label>
+                <span id="playerNameDisplay"><script>document.addEventListener("DOMContentLoaded", function() {displayPlayerName();});</script></span>
+                <button onclick="changePlayerName()">Change Name</button>               
             </div>
 
-            <div id="cardBackImage" class="option-section">
-                <h2>Card Back Image</h2>
-                <!-- Content for car back image -->
-        </div>
+            <!-- create a row within a div to display "Background Image: " and the background image, and a button to change the background image -->
 
-        <div id="currentStats" class="option-section">
-                <h2>Current Stats</h2>
-                <!-- Content for current stats -->
+
+            <!-- create a row within a div to display "Card Back: " and the card back, and a button to change the card back -->
+
+            <!-- create a row to display current session stats -->
+            <div class="row">
+                <div class="current-session-stats">
+                    <label for="sessionStats">Current Session Stats: </label>
+                    <span id="sessionStatsDisplay"><script>document.addEventListener("DOMContentLoaded", function() {displayCurrentSessionStats();});</script></span>
+                </div>
             </div>
+            <!-- create a row to display a reset stats buttom -->
+            <div class="row">
+                <div class="reset-stats">
+                    <button onclick="resetCurrentSessionStats()" style="display: block; margin: 0 auto;">Reset Stats</button>
+                </div>
+            </div>
+            <script src="./assets/scripts/game_play.js"></script>
         </div>
     </div>
 

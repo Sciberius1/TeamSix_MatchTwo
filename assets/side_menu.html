@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Animal Match</title>
+
+        <link rel="stylesheet" href="./assets/css/name.css">
+        <link rel="stylesheet" href="./assets/css/score.css">
+        <link rel="stylesheet" href="./assets/css/games.css">
+        <link rel="stylesheet" href="./assets/css/options.css">
+        <link rel="stylesheet" href="./assets/css/restart.css">
+        <link rel="stylesheet" href="./assets/css/quit.css">
+        <link rel="stylesheet" href="./assets/css/styles.css">
+        <link rel="stylesheet" href="./assets/css/side_menu.css">
+
+    </head>
+<body>
+    <nav class= "sidemenu">
+        <header>
+            <div class="avatar">
+                <span class="image">
+                <img src="./assets/images/rainbow-flower-w-cottoncandy.png" alt="rainbow">
+                </span>
+
+            <div class="text header-text">
+                <span class="game">Animal Match-Up</span>
+                <span class="group">Team 6</span>
+            </div>
+
+            <!-- === for colapsable menu === -->
+            <!-- <i class='bx bx-chevron-right toggle'></i> -->
+
+        </header>
+
+        <div class="menu-bar">
+            <div class="content">
+                <li class="player-name">
+                    <h2>Player Name</h2>
+                    <input type="text" id="player-name" placeholder="Enter your name">
+                </li>
+                <li class="timer">
+                    <h2>Timer</h2>
+                    <p id="timer">0:00</p>
+                </li>
+                <li class="games">
+                    <h2>Games</h2>        
+                    <p id="games">0</p>
+                </li>
+
+                <li class="play">
+                    <button id="play">PLAY!</button>
+                </li>
+
+                <!-- === if time allows === -->
+
+                <li class="options">
+                    <button id="options">Options</button>
+                </li>
+
+                <!-- === end options === -->
+
+                <li class="restart">
+                    <button id="restart">Restart</button>
+                </li>
+
+                <li class="quit">
+                    <button id="quit">Quit</button>
+                </li>
+            
+            </div>
+        </div>
+    </nav>
+
+    <script src="./assets/scrpts/playing_field.js"></script>
+    <script src="./assets/scrpts/sidemenu.js"></script>
+    <script src="./assets/scrpts/score.js"></script>
+    <script src="./assets/scrpts/games.js"></script>
+    <script src="./assets/scrpts/options.js"></script>
+    <script src="./assets/scrpts/restart.js"></script>
+    <script src="./assets/scrpts/quit.js"></script>
+
+</body>    
+</html>

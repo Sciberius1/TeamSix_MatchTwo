@@ -5,7 +5,7 @@
        "fastestTime": 30,
        "averageTime": 315,
        "backgroundImage": "../assets/images/BLACKOUT.png",
-       "cardBack": "../assets/images/troll_picnic.png"
+       "cardBackImage": "../assets/images/troll_picnic.png"
     },
     {
       "playerName": "Stephanie",
@@ -13,7 +13,7 @@
       "fastestTime": 30,
       "averageTime": 310,
       "backgroundImage": "../assets/images/the_perfect_slushie.png",
-      "cardBack": "../assets/images/troll_picnic.png"
+      "cardBackImage": "../assets/images/troll_picnic.png"
     },
     {
       "playerName": "playerName",
