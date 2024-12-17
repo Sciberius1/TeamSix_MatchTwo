@@ -1,5 +1,139 @@
-:root{
-    --primary-color: #0b1de4;
-    --secondary-color: #6d11cf;
-    --
+/* Elements for the side menu */
+
+:root {
+    --secondary: #10ca8f;
+    --body: #2dc45f;
+    --primary: #f03d15;
+    --primary-light: #4d383b;
+    --toggle: #deed0a;
+    --button: #f47c2b;
+    --text: #e5eb38;
+    --tran-01: all 0.2s ease-in-out;
+    --tran-02: all 0.3s ease-in-out;
+    --tran-03: all 0.4s ease-in-out;
+    --tran-04: all 0.5s ease-in-out;
 }
+
+body {
+    height: 100vh;
+    background: var(--body);
+
+}
+
+header .avatar .header-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-text .game {
+    font-weight: 600;
+}
+
+.header-text .group {
+    margin-top: -2px;
+}
+
+.sidemenu header{
+    position: relative;
+}
+
+.sidemenu header .header-text {
+    font-size: 20px;
+    display: flex;
+    align-content: center;
+
+}
+
+.sidemenu {
+    width: 250px;
+    height: 100%;
+    background-color: var(--primary);
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding: 10px 15px;
+    color: var(--toggle);
+}
+
+.sidemenu .avatar {
+    display: flex;
+    align-items: center;
+}
+
+.sidemenu .avatar img{
+    width: 50px;
+    height: 50px;
+    border-radius: 7px;
+}
+
+.sidemenu header .avatar{
+    font-display: flex;
+    align-items: center;
+}
+
+.sidemenu .image {
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.sidemenu li {
+   height: 50px;
+   background: #056917c4;
+   margin-top: 10px;
+   list-style: none;
+   display: flex;
+    align-items: center;
+    border-radius: 12px;
+}
+
+.sidemenu li p {
+    margin: 25px;
+    color: var(--text);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+    font-weight: 500;
+}
+.sidemenu li button {
+    width: 100%;
+    height: 75%;
+    background-color: var(--button);
+    border-radius: 12px;
+    font-family: fantasy;
+    font-size: 20px;
+    color: var(--text);
+}
+
+.sidemenu li button:hover {
+    background-color: var(--toggle);
+    transition: var(--tran-02);
+    color: var(--button);
+}
+
+
+.sidemenu .text {
+    padding: 8px 16px;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+}
+
+/* === collapsable menu === */
+/* .sidemenu header .toggle {
+    position: absolute;
+    top: 50%;
+    right: -25px;
+    transform: translateY(-50%);
+    height: 25px;
+    width: 25px;
+    background-color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--secondary);
+    font-size: 22px;
+} */
