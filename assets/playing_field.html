@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Matching Game</title>
+    <style>
+        body {
+
+        }
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            grid-template-rows: repeat(4, 100px);
+            gap: 10px;
+        }
+        .card {
+            width: 100px;
+            height: 100px;
+            background-image: url('./images/cardBacks/baby_orangutan.png');
+            background-size: cover;
+            cursor: pointer;
+        }
+        .card.flipped {
+            background-size: contain;
+            background-size: cover;
+        }
+        .victory-message {
+            display: none;
+            font-size: 24px;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-board" id="gameBoard"></div>
+    <div class="victory-message" id="victoryMessage"></div>
+
+    <!-- use card images from the following array -->
+    <script>
+    const cardImages = [
+        './images/cards/card1.png',
+        './images/cards/card2.png',
+        './images/cards/card3.png',
+        './images/cards/card4.png',
+        './images/cards/card5.png',
+        './images/cards/card6.png',
+        './images/cards/card7.png',
+        './images/cards/card8.png'
+    ];
+
+    // game logic
+        let cards = [...cardImages, ...cardImages];
+        let firstCard, secondCard;
+        let hasFlippedCard = false;
+        let lockBoard = false;
+        let matches = 0;
+        let startTime, endTime;
+// shuffle the cardImages array
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+// create the game board
+        function createBoard() {
+            shuffle(cards);
+            const gameBoard = document.getElementById('gameBoard');
+            cards.forEach((card, index) => {
+                const cardElement = document.createElement('div');
+                cardElement.classList.add('card');
+                cardElement.dataset.image = card;
+                cardElement.addEventListener('click', flipCard);
+                gameBoard.appendChild(cardElement);
+            });
+        }
+// flip the card
+        function flipCard() {
+            if (lockBoard) return;
+            if (this === firstCard) return;
+
+            this.style.backgroundImage = `url(${this.dataset.image})`;
+            this.classList.add('flipped');
+
+            if (!hasFlippedCard) {
+                hasFlippedCard = true;
+                firstCard = this;
+                if (!startTime) startTime = new Date();
+                return;
+            }
+
+            secondCard = this;
+            checkForMatch();
+        }
+
+// check for a match
+        function checkForMatch() {
+            let isMatch = firstCard.dataset.image === secondCard.dataset.image;
+            if (isMatch) {
+            disableCards();
+            } else {
+            unflipCards();
+            }
+        }
+// disable the cards that have been matched
+        function disableCards() {
+            firstCard.removeEventListener('click', flipCard);
+            secondCard.removeEventListener('click', flipCard);
+            resetBoard();
+            matches++;
+            if (matches === 8) {
+                endTime = new Date();
+                showVictoryMessage();
+            }
+        }
+// unflip the cards that do not match
+        function unflipCards() {
+            lockBoard = true;
+            setTimeout(() => {
+                firstCard.style.backgroundImage = 'url(./images/cardBacks/monkey_ride.png)';
+                secondCard.style.backgroundImage = 'url(./images/cardBacks/monkey_ride.png)';
+                firstCard.classList.remove('flipped');
+                secondCard.classList.remove('flipped');
+                resetBoard();
+            }, 2000);
+        }
+// reset the board to play again
+        function resetBoard() {
+            [hasFlippedCard, lockBoard] = [false, false];
+            [firstCard, secondCard] = [null, null];
+        }
+
+// show the victory message in an alert
+        function showVictoryMessage() {
+            const timeTaken = Math.floor((endTime - startTime) / 1000);
+            const minutes = Math.floor(timeTaken / 60);
+            const seconds = timeTaken % 60;
+            alert(`Congratulations! You completed the game in ${minutes} minutes and ${seconds} seconds.`);
+        }
+    
+    
+
+        createBoard();
+    </script>
+
+</body>
+</html>
