@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="./assets/css/games.css">
         <link rel="stylesheet" href="./assets/css/options.css">
         <link rel="stylesheet" href="./assets/css/restart.css">
-        <link rel="stylesheet" href="./assets/css/quit.css">
+        <link rel="stylesheet" href="./assets/css/header.css">
         <link rel="stylesheet" href="./assets/css/styles.css">
         <link rel="stylesheet" href="./assets/css/side_menu.css">
 
@@ -31,7 +31,7 @@
         <header>
             <div class="avatar">
                 <span class="image">
-                <img src="./assets/images/rainbow-flower-w-cottoncandy.png" alt="rainbow">
+                <img src="./assets/images/backgrounds/rainbow-flower-w-cottoncandy.png" alt="rainbow">
                 </span>
 
             <div class="text header-text">
@@ -47,36 +47,53 @@
         <div class="menu-bar">
             <div class="content">
                 <li class="player-name">
-                    <h2>Player Name</h2>
                     <input type="text" id="player-name" placeholder="Enter your name">
                 </li>
-                <li class="score">
-                    <h2>Score</h2>
-                    <p id="score">0</p>
+                <!-- <li class="timer">
+                    <h2>Timer</h2>
+                    <p id="timer">0:00</p>
                 </li>
                 <li class="games">
                     <h2>Games</h2>        
                     <p id="games">0</p>
-                </li>
+                </li> -->
 
                 <li class="play">
-                    <button id="play">PLAY!</button>
+                    <a href="#"><button id="play">PLAY!</button></a>
+                </li>
+
+                <li class="current-player">
+                    <p id="current-player">Player</p>
+                </li>
+
+                <li class="play-time">
+                    <p id="play-time">0:00</p>
                 </li>
 
                 <!-- === if time allows === -->
 
                 <li class="options">
-                    <button id="options">Options</button>
+                    <a href="assets/options_menu.html"><button id="options">Options</button></a>
+                </li>
+
+                <li class="top-player">
+                    <h2>Top Player!</h2>
+                    <p id="top-player">Top Player</p>
+                </li>
+
+                <li class="best-time">
+                    <h2>Best Time</h2>
+                    <p id="best-time">0:00</p>
                 </li>
 
                 <!-- === end options === -->
 
-                <li class="restart">
+                <!-- <li class="restart">
                     <button id="restart">Restart</button>
-                </li>
+                </li> -->
 
                 <li class="quit">
-                    <button id="quit">Quit</button>
+                    <a href="#"><button id="quit">Quit</button></a>
                 </li>
             
             </div>
