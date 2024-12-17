@@ -6,9 +6,15 @@
     <title>Card Matching Game</title>
     <style>
         body {
-
+            width: 75vw;
+            height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .game-board {
+            align-items: center;
+            margin: auto 0;
             display: grid;
             grid-template-columns: repeat(4, 100px);
             grid-template-rows: repeat(4, 100px);
@@ -20,6 +26,7 @@
             background-image: url('./images/cardBacks/baby_orangutan.png');
             background-size: cover;
             cursor: pointer;
+            border: blue 1px solid;
         }
         .card.flipped {
             background-size: contain;
