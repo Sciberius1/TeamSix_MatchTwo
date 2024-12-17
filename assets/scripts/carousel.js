@@ -27,6 +27,6 @@ function createCarousel(carouselId) {
 }
 
 // Initialize carousels for each ID
-createCarousel('artwork');
-createCarousel('awards');
-createCarousel('creative-writing');
+createCarousel('backgroundImage');
+createCarousel('cardBackImage');
+
