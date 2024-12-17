@@ -1,5 +1,5 @@
 /* Elements for the side menu */
-/* 
+
 :root {
     --secondary: #10ca8f;
     --body: #2dc45f;
@@ -92,17 +92,27 @@ header .avatar .header-text {
     margin: 25px;
     color: var(--text);
     font-family: 'Times New Roman', Times, serif;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 500;
 }
 .sidemenu li button {
     width: 100%;
-    height: 75%;
+    height: 90%;
     background-color: var(--button);
     border-radius: 12px;
     font-family: fantasy;
     font-size: 20px;
     color: var(--text);
+}
+
+.sidemenu li a {
+    width: 100%;
+    height: 100%;
+    /* background-color: var(--button);
+    border-radius: 12px;
+    font-family: fantasy;
+    font-size: 20px;
+    color: var(--text); */
 }
 
 .sidemenu li button:hover {
@@ -119,7 +129,7 @@ header .avatar .header-text {
     color: var(--text);
     display: flex;
     align-items: center;
-} */
+}
 
 /* === collapsable menu === */
 /* .sidemenu header .toggle {
