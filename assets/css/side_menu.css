@@ -15,8 +15,8 @@
 }
 
 body {
+    width: 400px;
     height: 100vh;
-    background: var(--body);
 
 }
 
@@ -45,15 +45,16 @@ header .avatar .header-text {
 }
 
 .sidemenu {
-    width: 250px;
-    height: 100%;
-    background-color: var(--primary);
+    width: 400px;
+    height: 100vh;
+    background-color: rgba(255, 255, 0, 0.148);
     position: fixed;
-    top: 0;
+    top: 10vh;
     left: 0;
     overflow-x: hidden;
     padding: 10px 15px;
     color: var(--toggle);
+    border-radius: 40px;
 }
 
 .sidemenu .avatar {
@@ -86,7 +87,7 @@ header .avatar .header-text {
 }
 
 .sidemenu li {
-   height: 50px;
+   height: 40px;
    background: #056917c4;
    margin-top: 10px;
    list-style: none;
